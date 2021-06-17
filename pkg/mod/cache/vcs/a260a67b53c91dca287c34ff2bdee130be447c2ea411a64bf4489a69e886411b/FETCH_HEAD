@@ -1,0 +1,7 @@
+52c3e6f60cffa0133a3f9b2fc7f6862504a6cba0		branch 'internal-branch.go1.16-vendor' of https://go.googlesource.com/arch
+cbf565b21d1e6f86b3114f28f516032b201c97fa		branch 'master' of https://go.googlesource.com/arch
+5de9028c2478e6cb4e1c1b1f4386f3f0a93e383a		branch 'release-branch.go1.11' of https://go.googlesource.com/arch
+5a4828bb704534b8a2fa09c791c67d0fb372f472		branch 'release-branch.go1.12' of https://go.googlesource.com/arch
+8a70ba74b3a127cb7b5c60fb1cace3f58b6c65fe		branch 'release-branch.go1.13' of https://go.googlesource.com/arch
+8a70ba74b3a127cb7b5c60fb1cace3f58b6c65fe		branch 'release-branch.go1.14' of https://go.googlesource.com/arch
+f7c78586839d44dc82dc2187bb3cd956bbc4446a		branch 'release-branch.go1.15' of https://go.googlesource.com/arch

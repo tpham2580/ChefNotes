@@ -1,0 +1,5 @@
+9e8e0b390897c84cad53ebe9ed2d1d331a5394d9		branch 'internal-branch.go1.16-vendor' of https://go.googlesource.com/crypto
+5ff15b29337e062d850872081bcd9f4d784f4c25		branch 'master' of https://go.googlesource.com/crypto
+8b5121be2f68d8fc40bb06467003bdde1040a094		branch 'release-branch.go1.13' of https://go.googlesource.com/crypto
+69ecbb4d6d5dab05e49161c6e77ea40a030884e1		branch 'release-branch.go1.14' of https://go.googlesource.com/crypto
+75b288015ac94e66e3d6715fb68a9b41bf046ec2		branch 'release-branch.go1.15' of https://go.googlesource.com/crypto
