@@ -1,4 +1,4 @@
-<img src="./ChefNotesIcon.svg" alt="" width="75" height="60">
+<img src="./ChefNotes-Icon.svg" alt="" width="75" height="60">
 
 # ChefNotes
 
