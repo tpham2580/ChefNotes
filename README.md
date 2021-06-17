@@ -1,3 +1,5 @@
+<img src="./ChefNotesIcon.svg" alt="" width="75" height="60">
+
 # ChefNotes
 
 ## Overview
