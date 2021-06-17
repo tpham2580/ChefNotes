@@ -6,7 +6,7 @@
 ### Description
 ChefNotes is an android application that allows users to have all their recipes saved in one place
 
-### Walkthough GIF
+### Walkthrough GIF
 
 #### Current Features
 
