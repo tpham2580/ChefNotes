@@ -22,4 +22,3 @@ ChefNotes is an android application that allows users to have all their recipes 
 
 ## 😋 Authors
   - [Timothy Pham](https://github.com/tpham2580)
-  - [Rajan Desai](https://github.com/rajandes7)
