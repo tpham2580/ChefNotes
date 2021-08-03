@@ -11,7 +11,7 @@ ChefNotes is an android application that allows users to have all their recipes 
 #### Current Features
 
 #### Future Updates
-- [ ]   Recipe Entities to PG server
+- [X]   Recipe Entities to PG server
 - [ ]   User Authentication to PG server
 - [ ]   CRUD methods with Go
 
