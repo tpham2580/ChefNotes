@@ -9,11 +9,17 @@ ChefNotes is an android application that allows users to have all their recipes 
 ### Walkthrough GIF
 
 #### Current Features
+- [X]   Recipe Entities to PG server
 
 #### Future Updates
-- [X]   Recipe Entities to PG server
-- [ ]   User Authentication to PG server
 - [ ]   CRUD methods with Go
+- [ ]   User Authentication to PG server
+
+#### Entity-Relationship Diagram
+![ER-diagram](https://i.postimg.cc/2Sx2bt7h/Chef-Notes-ER.png)
+
+#### Schema
+![Schema](https://i.postimg.cc/rwTfpTxq/Chef-Notes-Schema.png)
 
 ## 🔨 ChefNotes is built with
   - [Go](https://golang.org/doc/)
