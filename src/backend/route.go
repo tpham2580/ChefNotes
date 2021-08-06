@@ -30,3 +30,7 @@ func getPosts(resp http.ResponseWriter, req *http.Request) {
 	resp.WriteHeader(http.StatusOK)
 	resp.Write(result)
 }
+
+func addPost(resp http.ResponseWriter, req *http.Request) {
+
+}
