@@ -1,3 +1,12 @@
+-- Drop all tables without removing SCHEMA
+DO $$ DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = current_schema()) LOOP
+        EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+    END LOOP;
+END $$;
+
 -- READ functionality
 SELECT * FROM unit;
 SELECT * FROM author;
@@ -13,7 +22,7 @@ SELECT * FROM nutrition;
 CREATE functionality
 */
 -- author
-INSERT INTO "author" ("firstNames", "lastName") VALUES
+INSERT INTO "author" ("firstName", "lastName") VALUES
     (:firstNameInput, :lastNameInput);
 
 -- cuisine
@@ -23,6 +32,12 @@ INSERT INTO "cuisine" ("country", "name") VALUES
 -- recipe
 INSERT INTO "recipe" ("recipeName", "authorID", "datePublished", "description", "prepTime", "cookTime", "cuisineID", "courseID", "servings") VALUES
     (:recipeNameInput, (SELECT "authorID" FROM "author" WHERE "authorID" = :authorIDInput), :descriptionInput, :prepTimeInput, :cookTimeInput, (SELECT "cuisineID" FROM "cuisine" WHERE "cuisineID" = :cuisineIDInput), (SELECT "courseID" FROM "courseType" WHERE "courseID" = :courseIDInput), :servingsInput);
+
+/**
+Example:
+INSERT INTO "recipe" ("recipeName", "authorID", "description", "prepTime", "cookTime", "cuisineID", "courseID", "servings") VALUES
+    ('Chicken & Sausage Gumbo', (SELECT "authorID" FROM "author" WHERE "authorID" = 1), 'Classic cajun stew dish best served with white rice!', NULL, NULL, (SELECT "cuisineID" FROM "cuisine" WHERE "cuisineID" = 1), (SELECT "courseID" FROM "courseType" WHERE "courseID" = 7), 4);
+**/
 
 -- instruction
 INSERT INTO "instruction" ("recipeID", "step", "instruction") VALUES
