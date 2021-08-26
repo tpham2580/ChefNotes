@@ -17,6 +17,25 @@ SELECT * FROM instruction;
 SELECT * FROM ingredient;
 SELECT * FROM nutrition;
 
+-- example getRecipe by username
+SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."country", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
+FROM "recipe"
+    INNER JOIN "author" ON "recipe"."authorID" = "author"."authorID"
+    INNER JOIN "cuisine" ON "recipe"."cuisineID" = "cuisine"."cuisineID"
+    INNER JOIN "courseType" ON "recipe"."courseID" = "courseType"."courseID"
+WHERE "author"."username" = 'tp96';
+
+-- get all ingredients by recipeID
+SELECT "ingredient"."name" as "ingredient_name", "ingredient"."amount", "unit"."name" as "unit"
+FROM "ingredient"
+    INNER JOIN "unit" ON "ingredient"."unitID" = "unit"."unitID"
+WHERE "ingredient"."recipeID" = 1;
+
+-- get all instructions by recipeID and sort in ascending order of step numbers
+SELECT "instruction"."step", "instruction"."instruction"
+FROM "instruction"
+WHERE "instruction"."recipeID" = 1
+ORDER BY "instruction"."step" ASC;
 
 /*
 CREATE functionality
