@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,27 +14,38 @@ import (
 	"github.com/lib/pq"
 )
 
-var recipes []Recipe
-
-var Recipe []*struct {
+var Recipe struct {
 	Id             string
 	Name           string
 	Author         string
 	Date_Published time.Time
 	Description    string
+	Prep_Time      string
+	Cook_Time      string
 	Cuisine        string
 	Course_Type    string
+	Servings       int
+	Ingredients    []Ingredient
 	Instructions   []Instruction
 }
 
+type Ingredient struct {
+	Name   string
+	Amount string
+	Unit   string
+}
+
 type Instruction struct {
-	Step int
+	Step        int
+	Instruction string
 }
 
 var courseType []*struct {
 	Id   int
 	Name string
 }
+
+var recipes []Recipe
 
 func logFatal(err error) {
 	if err != nil {
@@ -42,7 +54,8 @@ func logFatal(err error) {
 }
 
 func getRecipes(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(recipes)
 }
 
 func getRecipe(w http.ResponseWriter, r *http.Request) {
