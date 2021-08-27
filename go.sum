@@ -2,6 +2,10 @@ github.com/eaigner/jet v0.0.0-20140105131908-ae59b2cccfe3 h1:dOZHh7hVmgid84dAUqq
 github.com/eaigner/jet v0.0.0-20140105131908-ae59b2cccfe3/go.mod h1:dDZTQm1VvYk0PrMlFHIhNE+6WPbmDv4EO8Qt96ix3Q4=
 github.com/go-gorp/gorp v2.2.0+incompatible h1:xAUh4QgEeqPPhK3vxZN+bzrim1z5Av6q837gtjUlshc=
 github.com/go-gorp/gorp v2.2.0+incompatible/go.mod h1:7IfkAQnO7jfT/9IQ3R9wL1dFhukN6aQxzKTHnkxzA/E=
+github.com/go-jet/jet v1.0.0 h1:ENxUe/6lH82qLykIGAdZIlskZrpTeNfxjHz4VHtkVmA=
+github.com/go-jet/jet v1.0.0/go.mod h1:XgTt00fj8pAXMKe1ETL9R/kZWWyi2j/ymuH+gaW+EdI=
+github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
+github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
