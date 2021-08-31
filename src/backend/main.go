@@ -13,19 +13,22 @@ import (
 	"github.com/lib/pq"
 )
 
-var Recipe []*struct {
-	Id             string    `json:"id"`
-	Name           string    `json:"name"`
-	Author         string    `json:"author"`
-	Date_Published time.Time `json:"date_published"`
-	Description    string    `json:"description"`
-	Prep_Time      string    `json:"prep_time"`
-	Cook_Time      string    `json:"cook_time"`
-	Cuisine        string    `json:"cuisine"`
-	Course_Type    string    `json:"course_type"`
-	Servings       int       `json:"servings"`
-	//Ingredients    []Ingredient  `json:"ingredient_list"`
-	//Instructions   []Instruction `json:"instruction_list"`
+// declaring db as global
+var db *sql.DB
+
+type Recipe struct {
+	Id             int            `json:"id"`
+	Name           string         `json:"name"`
+	Author         sql.NullString `json:"author"`
+	Date_Published time.Time      `json:"date_published"`
+	Description    sql.NullString `json:"description"`
+	Prep_Time      sql.NullString `json:"prep_time"`
+	Cook_Time      sql.NullString `json:"cook_time"`
+	Cuisine        sql.NullString `json:"cuisine"`
+	Course_Type    sql.NullString `json:"course_type"`
+	Servings       sql.NullInt32  `json:"servings"`
+	Ingredients    []Ingredient   `json:"ingredient_list"`
+	Instructions   []Instruction  `json:"instruction_list"`
 }
 
 type Ingredient struct {
@@ -71,7 +74,30 @@ func updateRecipe(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteRecipe(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	//params := mux.Vars(r)
+	rows, err := db.Query(`SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
+	FROM "recipe"
+		INNER JOIN "author" ON "recipe"."authorID" = "author"."authorID"
+		INNER JOIN "cuisine" ON "recipe"."cuisineID" = "cuisine"."cuisineID"
+		INNER JOIN "courseType" ON "recipe"."courseID" = "courseType"."courseID"
+	WHERE "author"."username" = 'tp96';`)
 
+	logFatal(err)
+	defer rows.Close()
+
+	recipes := make([]Recipe, 0)
+
+	for rows.Next() {
+		recipe := Recipe{}
+		err := rows.Scan(&recipe.Id, &recipe.Name, &recipe.Author, &recipe.Date_Published, &recipe.Description, &recipe.Prep_Time, &recipe.Cook_Time, &recipe.Cuisine, &recipe.Course_Type, &recipe.Servings)
+		logFatal(err)
+		recipes = append(recipes, recipe)
+	}
+
+	for _, recipe := range recipes {
+		fmt.Printf("Recipe Name: %s\nAuthor: %s\nDate Published: %s\nDescription: %s\nCuisine: %s\nCourse Type: %s\n", recipe.Name, recipe.Author, recipe.Date_Published.String(), recipe.Description, recipe.Cuisine, recipe.Course_Type)
+	}
 }
 
 func main() {
@@ -87,21 +113,27 @@ func main() {
 	// use db.Query to prevent SQL injection attacks
 	// db.Query("SELECT name FROM users WHERE age=?", req.FormValue("age")) as an example.
 	// include the ? symbol
-	rows, err := db.Query(`SELECT * FROM "courseType"`)
+	rows, err := db.Query(`SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
+	FROM "recipe"
+		INNER JOIN "author" ON "recipe"."authorID" = "author"."authorID"
+		INNER JOIN "cuisine" ON "recipe"."cuisineID" = "cuisine"."cuisineID"
+		INNER JOIN "courseType" ON "recipe"."courseID" = "courseType"."courseID"
+	WHERE "author"."username" = 'tp96';`)
+
 	logFatal(err)
 	defer rows.Close()
 
-	courses := make([]courseType, 0)
+	recipes := make([]Recipe, 0)
 
 	for rows.Next() {
-		course := courseType{}
-		err := rows.Scan(&course.Id, &course.Name)
+		recipe := Recipe{}
+		err := rows.Scan(&recipe.Id, &recipe.Name, &recipe.Author, &recipe.Date_Published, &recipe.Description, &recipe.Prep_Time, &recipe.Cook_Time, &recipe.Cuisine, &recipe.Course_Type, &recipe.Servings)
 		logFatal(err)
-		courses = append(courses, course)
+		recipes = append(recipes, recipe)
 	}
 
-	for _, course := range courses {
-		fmt.Printf("%s\n", course.Name)
+	for _, recipe := range recipes {
+		fmt.Printf("Recipe Name: %s\nAuthor: %s\nDate Published: %s\nDescription: %s\nCuisine: %s\nCourse Type: %s\n", recipe.Name, recipe.Author, recipe.Date_Published.String(), recipe.Description, recipe.Cuisine, recipe.Course_Type)
 	}
 
 	// routing

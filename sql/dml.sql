@@ -18,7 +18,7 @@ SELECT * FROM ingredient;
 SELECT * FROM nutrition;
 
 -- example getRecipe by username
-SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."country", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
+SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
 FROM "recipe"
     INNER JOIN "author" ON "recipe"."authorID" = "author"."authorID"
     INNER JOIN "cuisine" ON "recipe"."cuisineID" = "cuisine"."cuisineID"
