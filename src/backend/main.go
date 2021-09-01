@@ -75,13 +75,13 @@ func updateRecipe(w http.ResponseWriter, r *http.Request) {
 
 func deleteRecipe(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	//params := mux.Vars(r)
+	params := mux.Vars(r)
 	rows, err := db.Query(`SELECT "recipe"."recipeID", "recipe"."recipeName", "author"."username", "recipe"."datePublished", "recipe"."description", "recipe"."prepTime", "recipe"."cookTime", "cuisine"."name" as "cuisine_name", "courseType"."name" as "course_name", "recipe"."servings"
 	FROM "recipe"
 		INNER JOIN "author" ON "recipe"."authorID" = "author"."authorID"
 		INNER JOIN "cuisine" ON "recipe"."cuisineID" = "cuisine"."cuisineID"
 		INNER JOIN "courseType" ON "recipe"."courseID" = "courseType"."courseID"
-	WHERE "author"."username" = 'tp96';`)
+	WHERE "author"."username" = '?';`, params["id"])
 
 	logFatal(err)
 	defer rows.Close()
