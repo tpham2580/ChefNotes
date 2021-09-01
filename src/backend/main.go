@@ -56,6 +56,7 @@ func logFatal(err error) {
 	}
 }
 
+// get all recipes based on username
 func getRecipes(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
