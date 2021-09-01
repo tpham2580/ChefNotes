@@ -22,11 +22,12 @@ CREATE TABLE "author" (
     "authorID" SERIAL PRIMARY KEY,
     "username" VARCHAR NOT NULL UNIQUE,
     "firstName" VARCHAR NOT NULL,
-    "lastName" VARCHAR NOT NULL
+    "lastName" VARCHAR NOT NULL,
+    "about" VARCHAR
 );
 
-INSERT INTO "author" ("username", "firstName", "lastName") VALUES
-    ('tp96', 'Timothy', 'Pham');
+INSERT INTO "author" ("username", "firstName", "lastName", "about") VALUES
+    ('tp96', 'Timothy', 'Pham', 'Love of food comes from eating Vietnamese dishes growing up');
 
 
 /*** CourseType ***/
@@ -69,7 +70,8 @@ CREATE TABLE "recipe" (
     "cookTime" VARCHAR,
     "cuisineID" INT REFERENCES "cuisine"("cuisineID") ON DELETE SET NULL,
     "courseID" INT REFERENCES "courseType"("courseID") ON DELETE SET NULL,
-    "servings" INT
+    "servings" INT,
+    "private" BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 INSERT INTO "recipe" ("recipeName", "authorID", "description", "prepTime", "cookTime", "cuisineID", "courseID", "servings") VALUES
