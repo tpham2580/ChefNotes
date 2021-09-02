@@ -57,7 +57,8 @@ CREATE TABLE "cuisine" (
 );
 
 INSERT INTO "cuisine" ("country", "name") VALUES
-    ('United States', 'Cajun/Creole');
+    ('United States', 'Cajun/Creole'),
+    ('Italy', 'Italian');
 
 /*** Recipe ***/
 CREATE TABLE "recipe" (
@@ -75,7 +76,8 @@ CREATE TABLE "recipe" (
 );
 
 INSERT INTO "recipe" ("recipeName", "authorID", "description", "prepTime", "cookTime", "cuisineID", "courseID", "servings") VALUES
-    ('Chicken & Sausage Gumbo', (SELECT "authorID" FROM "author" WHERE "username" = 'tp96'), 'Classic cajun stew dish best served with white rice!', NULL, NULL, (SELECT "cuisineID" FROM "cuisine" WHERE "name" = 'Cajun/Creole'), (SELECT "courseID" FROM "courseType" WHERE "courseID" = 7), 4);
+    ('Chicken & Sausage Gumbo', (SELECT "authorID" FROM "author" WHERE "username" = 'tp96'), 'Classic cajun stew dish best served with white rice!', NULL, NULL, (SELECT "cuisineID" FROM "cuisine" WHERE "name" = 'Cajun/Creole'), (SELECT "courseID" FROM "courseType" WHERE "courseID" = 7), 4),
+    ('Pasta Carbonara', (SELECT "authorID" FROM "author" WHERE "username" = 'tp96'), 'Classic italian dish made with egg, pork, cheese, and pasta!', NULL, NULL, (SELECT "cuisineID" FROM "cuisine" WHERE "name" = 'Italian'), (SELECT "courseID" FROM "courseType" WHERE "courseID" = 1), 4);
 
 /*** Nutrition ***/
 CREATE TABLE "nutrition" (
@@ -111,7 +113,14 @@ INSERT INTO "ingredient" ("recipeID", "name", "unitID", "amount") VALUES
     ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 'andouille sausage, cut into ¼-inch coins', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '453'),
     ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 'cayenne pepper', NULL, 'to taste'),
     ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 'cooked white rice', NULL, 'for serving'),
-    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 'sliced scallions', NULL, 'for serving');
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 'sliced scallions', NULL, 'for serving'),
+    -- Pasta carbonara
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Pecorino Romano, grated', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '20'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Parmigiano Reggiano', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '30'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Black Pepper', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '20'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Egg Yolk', NULL, '4'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Guanciale', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '200'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 'Pasta of your choice', (SELECT "unitID" FROM "unit" WHERE "name" = 'g'), '280');
 
 /*** Instruction ***/
 CREATE TABLE "instruction" (
@@ -122,6 +131,11 @@ CREATE TABLE "instruction" (
 );
 
 INSERT INTO "instruction" ("recipeID", "step", "instruction") VALUES
+    -- Chicken & Sausage Gumbo
     ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 1, 'Season the chicken with salt, black pepper, and one tablespoon of grapeseed oil. Broil it until slightly charred and golden, about 10 minutes, and set aside.'), 
     ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 2, 'Heat a thick bottomed 4-quart Dutch oven over medium. Add the remaining oil and flour and, using a whisk, stir constantly, taking care not to allow any to splash and burn you, until the roux has turned dark brown (the color of a bar of Hershey''s chocolate is about right), about 25 minutes.'),
-    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 3, 'Add the garlic, celery, jalapeño, bell pepper, and onion and cook for one minute. Add the beer to deglaze, then add the stock, thyme, bay leaves, and 1 teaspoon black pepper. Stir slowly and continuously until the gumbo is back to a simmer, then add the chicken thighs and the sausage. Bring to a simmer and cover. Cook, stirring occasionally, for 3 hours. Gumbo should thick but not like gravy. Season with cayenne and serve with cooked rice. Top with scallions and enjoy.');
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 1), 3, 'Add the garlic, celery, jalapeño, bell pepper, and onion and cook for one minute. Add the beer to deglaze, then add the stock, thyme, bay leaves, and 1 teaspoon black pepper. Stir slowly and continuously until the gumbo is back to a simmer, then add the chicken thighs and the sausage. Bring to a simmer and cover. Cook, stirring occasionally, for 3 hours. Gumbo should thick but not like gravy. Season with cayenne and serve with cooked rice. Top with scallions and enjoy.'),
+    -- Pasta Carbonara
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 1, 'Add pecorino, parmigiano, egg yolks, and black pepper to bowl. Mix until until consistent.'), 
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 2, 'Cook guanciale on medium heat until most of the fat has rendered and the guanciale is sufficiently browned. Be sure to save the fat from the guanciale. Also, cook the pasta until al dente in salted water.'),
+    ((SELECT "recipeID" FROM "recipe" WHERE "recipeID" = 2), 3, 'Once pasta is done, add to sauce bowl, along with the cooked guanciale and some of the rendered fat. Stir over the pot that you used to cook the pasta in a double boiler fashion until the sauce has thickened up. Once the sauce is thickened up without scrambling, serve.');

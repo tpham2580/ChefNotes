@@ -114,7 +114,7 @@ func getRecipe(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// get Cook information and public
+// get Cook information and public recipes
 func getCook(w http.ResponseWriter, r *http.Request) {
 
 }
